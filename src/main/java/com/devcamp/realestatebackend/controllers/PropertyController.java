@@ -25,6 +25,7 @@ import com.devcamp.realestatebackend.repositories.IPropertyRepository;
 import com.devcamp.realestatebackend.repositories.IProvinceRepository;
 import com.devcamp.realestatebackend.repositories.IWardRepository;
 import com.devcamp.realestatebackend.services.PropertyService;
+import com.devcamp.realestatebackend.services.DTO.PropertyDTO;
 
 @RestController
 @CrossOrigin
@@ -46,9 +47,10 @@ public class PropertyController {
     IWardRepository wardRepository;
 
     @GetMapping
-    public ResponseEntity<List<Property>> getAllProperties() {
+    public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         try {
-            return new ResponseEntity<>(propertyService.getAllPropertiesService(), HttpStatus.OK);
+            List<PropertyDTO> propertyDTOs = propertyService.getAllPropertiesDTOService();
+            return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,8 +74,10 @@ public class PropertyController {
     }
 
     @PostMapping("/create/{provinceId}/{id}")
+
     public ResponseEntity<Object> createProperty(@PathVariable("id") int id,
-    @PathVariable("id") int provinceId, @RequestBody Property paramProperty) {
+                                               @PathVariable("provinceId") int provinceId,
+                                               @RequestBody Property paramProperty) {
         try {
             Optional<Province> propertyProvince = provinceRepository.findById(provinceId);
             Optional<District> propertyDistrict = districtRepository.findById(id);
