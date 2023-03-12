@@ -97,7 +97,7 @@ public class Property {
         this.province = province;
         this.district = district;
     }
-
+// test
     public long getId() {
         return id;
     }
