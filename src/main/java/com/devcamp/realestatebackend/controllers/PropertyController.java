@@ -27,6 +27,12 @@ import com.devcamp.realestatebackend.repositories.IWardRepository;
 import com.devcamp.realestatebackend.services.PropertyService;
 import com.devcamp.realestatebackend.services.DTO.PropertyDTO;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/properties")
@@ -57,7 +63,12 @@ public class PropertyController {
         }
     }
 
-    @GetMapping("/details/{id}")
+    @Operation(summary = "Find Property by ID", description = "Returns a single property", tags = { "property-controller" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = Property.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Property not found", content = @Content) })
+    @GetMapping("/details")
 	public ResponseEntity<Object> getPropertyById(@RequestParam(value="propertyId", required = true) long id) {
         Optional<Property> propertyData = propertyRepository.findById(id);
         if (propertyData.isPresent()) {
@@ -68,13 +79,12 @@ public class PropertyController {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 	    } else {
-            Property propertyNull = new Property();
-            return new ResponseEntity<>(propertyNull, HttpStatus.NOT_FOUND);
+            // Property propertyNull = new Property();
+            return new ResponseEntity<>("Property with id " + id + " not found", HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/create/{provinceId}/{id}")
-
     public ResponseEntity<Object> createProperty(@PathVariable("id") int id,
                                                @PathVariable("provinceId") int provinceId,
                                                @RequestBody Property paramProperty) {
