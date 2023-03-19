@@ -1,5 +1,6 @@
 package com.devcamp.realestatebackend.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,7 +84,27 @@ public class PropertyController {
             return new ResponseEntity<>("Property with id " + id + " not found", HttpStatus.NOT_FOUND);
         }
     }
-
+    // UPLOAD IMAGES TO THE PROPERTY (WORK IN PROGRESS)
+    // @PostMapping(value = "/details/{id}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    // public ResponseEntity<Object> uploadImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) {
+    //     try {
+    //         Optional<Property> propertyData = propertyRepository.findById(id);
+    //         if (propertyData.isPresent()) {
+    //             Property property = propertyData.get();
+    //             PropertyImage image = new PropertyImage();
+    //             image.setProperty(property);
+    //             image.setName(file.getOriginalFilename());
+    //             image.setData(file.getBytes());
+    //             propertyImageRepository.save(image);
+    //             return new ResponseEntity<>("Image uploaded successfully", HttpStatus.OK);
+    //         } else {
+    //             return new ResponseEntity<>("Property not found", HttpStatus.NOT_FOUND);
+    //         }
+    //     } catch (IOException e) {
+    //         return new ResponseEntity<>("Failed to upload image", HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+    
     @PostMapping("/create/{provinceId}/{id}")
     public ResponseEntity<Object> createProperty(@PathVariable("id") int id,
                                                @PathVariable("provinceId") int provinceId,
@@ -106,6 +127,7 @@ public class PropertyController {
                 newProperty.setPropertyPostingStatus(paramProperty.getPropertyPostingStatus());
                 newProperty.setPropertyPrice(paramProperty.getPropertyPrice());
                 newProperty.setPropertyWidth(paramProperty.getPropertyWidth());
+                newProperty.setCreatedDate(LocalDateTime.now());
 
                 Province _province = propertyProvince.get();
                 District _district = propertyDistrict.get();
@@ -123,6 +145,9 @@ public class PropertyController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    
+
    
 	@CrossOrigin
 	@PutMapping("/update/{id}")
@@ -162,7 +187,7 @@ public class PropertyController {
 		}
 	}
 
-    // Xoá/delete tất cả voucher KHÔNG dùng service, sử dụng phương thức DELETE
+    // Xoá/delete tất cả  KHÔNG dùng service, sử dụng phương thức DELETE
     @DeleteMapping("/employees/delete-all")// Dùng phương thức DELETE
     public ResponseEntity<Property> deleteAllProperties() {
         try {

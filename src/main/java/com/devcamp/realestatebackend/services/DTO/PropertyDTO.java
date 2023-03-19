@@ -1,6 +1,10 @@
 package com.devcamp.realestatebackend.services.DTO;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.devcamp.realestatebackend.models.Property;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PropertyDTO {
     private long id;
@@ -21,6 +25,9 @@ public class PropertyDTO {
     private int districtId;
     private String provincePrefix;
     private String districtPrefix;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDateTime createdDate;
     
     public PropertyDTO(Property property) {
         this.id = property.getId();
@@ -41,6 +48,7 @@ public class PropertyDTO {
         this.districtId = property.getDistrict().getId();
         this.provincePrefix = property.getProvince().getProvinceCode();
         this.districtPrefix = property.getDistrict().getDistrictPrefix();
+        this.createdDate = property.getCreatedDate();
     }
 
     public PropertyDTO() {
@@ -188,6 +196,14 @@ public class PropertyDTO {
 
     public void setDistrictId(int districtId) {
         this.districtId = districtId;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
     
     // getters and setters omitted for brevity

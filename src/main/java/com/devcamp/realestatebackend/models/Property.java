@@ -1,5 +1,7 @@
 package com.devcamp.realestatebackend.models;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -61,6 +64,10 @@ public class Property {
     @Column(name = "property_posting_status")
     private String propertyPostingStatus;
 
+    @Column(name = "created_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDateTime createdDate;
+    
     @ManyToOne
     @JoinColumn(name="province_id")
     @JsonBackReference(value="province-property")
@@ -79,7 +86,7 @@ public class Property {
     public Property(long id, String propertyAddressNumber, String propertyAddressStreet, String propertyArea,
             String propertyWidth, String propertyLength, String propertyFloorUnits, String propertyFloorLocation,
             String propertyPrice, String propertyLandType, String propertyLandDirection, String propertyLandLegalStatus,
-            String propertyDescription, String propertyPostingStatus, Province province, District district) {
+            String propertyDescription, String propertyPostingStatus, Province province, District district, LocalDateTime createdDate) {
         this.id = id;
         this.propertyAddressNumber = propertyAddressNumber;
         this.propertyAddressStreet = propertyAddressStreet;
@@ -96,6 +103,8 @@ public class Property {
         this.propertyPostingStatus = propertyPostingStatus;
         this.province = province;
         this.district = district;
+        this.createdDate = createdDate;
+
     }
 // test
     public long getId() {
@@ -224,6 +233,14 @@ public class Property {
 
     public void setDistrict(District district) {
         this.district = district;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
 
