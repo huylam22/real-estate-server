@@ -2,6 +2,7 @@ package com.devcamp.realestatebackend.services.DTO;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import com.devcamp.realestatebackend.models.Property;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -21,10 +22,13 @@ public class PropertyDTO {
     private String propertyLandLegalStatus;
     private String propertyDescription;
     private String propertyPostingStatus;
+    private int propertyBedrooms;
+    private int propertyBathrooms;
     private int provinceId;
     private int districtId;
     private String provincePrefix;
     private String districtPrefix;
+    private List<String> propertyCoverPaths;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDateTime createdDate;
@@ -49,6 +53,9 @@ public class PropertyDTO {
         this.provincePrefix = property.getProvince().getProvinceCode();
         this.districtPrefix = property.getDistrict().getDistrictPrefix();
         this.createdDate = property.getCreatedDate();
+        this.propertyBathrooms = property.getPropertyBathrooms();
+        this.propertyBedrooms = property.getPropertyBedrooms();
+        this.propertyCoverPaths = property.getPropertyCoverPaths();
     }
 
     public PropertyDTO() {
@@ -56,6 +63,21 @@ public class PropertyDTO {
 
     public String getProvincePrefix() {
         return provincePrefix;
+    }
+    public int getPropertyBedrooms() {
+        return propertyBedrooms;
+    }
+
+    public void setPropertyBedrooms(int propertyBedrooms) {
+        this.propertyBedrooms = propertyBedrooms;
+    }
+
+    public int getPropertyBathrooms() {
+        return propertyBathrooms;
+    }
+
+    public void setPropertyBathrooms(int propertyBathrooms) {
+        this.propertyBathrooms = propertyBathrooms;
     }
 
     public void setProvincePrefix(String provincePrefix) {
@@ -205,7 +227,13 @@ public class PropertyDTO {
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
-    
-    // getters and setters omitted for brevity
+
+    public List<String> getPropertyCoverPaths() {
+        return propertyCoverPaths;
+    }
+
+    public void setPropertyCoverPaths(List<String> propertyCoverPaths) {
+        this.propertyCoverPaths = propertyCoverPaths;
+    }
     
 }

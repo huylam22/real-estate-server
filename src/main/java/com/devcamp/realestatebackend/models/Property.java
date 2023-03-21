@@ -1,8 +1,14 @@
 package com.devcamp.realestatebackend.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,6 +52,12 @@ public class Property {
     @Column(name = "property_floor_location")
     private String propertyFloorLocation;
 
+    @Column(name = "property_bedrooms")
+    private int propertyBedrooms;
+
+    @Column(name = "property_bathrooms")
+    private int propertyBathrooms;
+
     @Column(name = "property_price")
     private String propertyPrice;
 
@@ -64,6 +76,11 @@ public class Property {
     @Column(name = "property_posting_status")
     private String propertyPostingStatus;
 
+    @ElementCollection
+    @CollectionTable(name = "property_cover_paths", joinColumns = @JoinColumn(name = "property_id"))
+    @Column(name = "cover_path")
+    private List<String> propertyCoverPaths = new ArrayList<>();
+
     @Column(name = "created_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDateTime createdDate;
@@ -80,13 +97,19 @@ public class Property {
     // @JsonProperty("districtId")
     private District district;
 
+    @OneToMany(mappedBy = "property")
+    private Set<PropertyPhoto> photos = new HashSet<>();
+
     public Property() {
     }
 
-    public Property(long id, String propertyAddressNumber, String propertyAddressStreet, String propertyArea,
+   
+public Property(long id, String propertyAddressNumber, String propertyAddressStreet, String propertyArea,
             String propertyWidth, String propertyLength, String propertyFloorUnits, String propertyFloorLocation,
-            String propertyPrice, String propertyLandType, String propertyLandDirection, String propertyLandLegalStatus,
-            String propertyDescription, String propertyPostingStatus, Province province, District district, LocalDateTime createdDate) {
+            int propertyBedrooms, int propertyBathrooms, String propertyPrice, String propertyLandType,
+            String propertyLandDirection, String propertyLandLegalStatus, String propertyDescription,
+            String propertyPostingStatus, List<String> propertyCoverPaths, LocalDateTime createdDate, Province province,
+            District district, Set<PropertyPhoto> photos) {
         this.id = id;
         this.propertyAddressNumber = propertyAddressNumber;
         this.propertyAddressStreet = propertyAddressStreet;
@@ -95,18 +118,49 @@ public class Property {
         this.propertyLength = propertyLength;
         this.propertyFloorUnits = propertyFloorUnits;
         this.propertyFloorLocation = propertyFloorLocation;
+        this.propertyBedrooms = propertyBedrooms;
+        this.propertyBathrooms = propertyBathrooms;
         this.propertyPrice = propertyPrice;
         this.propertyLandType = propertyLandType;
         this.propertyLandDirection = propertyLandDirection;
         this.propertyLandLegalStatus = propertyLandLegalStatus;
         this.propertyDescription = propertyDescription;
         this.propertyPostingStatus = propertyPostingStatus;
+        this.propertyCoverPaths = propertyCoverPaths;
+        this.createdDate = createdDate;
         this.province = province;
         this.district = district;
-        this.createdDate = createdDate;
-
+        this.photos = photos;
     }
-// test
+
+
+    public int getPropertyBedrooms() {
+    return propertyBedrooms;
+    }
+
+    public void setPropertyBedrooms(int propertyBedrooms) {
+        this.propertyBedrooms = propertyBedrooms;
+    }
+
+
+    public int getPropertyBathrooms() {
+        return propertyBathrooms;
+    }
+
+
+    public void setPropertyBathrooms(int propertyBathrooms) {
+        this.propertyBathrooms = propertyBathrooms;
+    }
+
+    public Set<PropertyPhoto> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<PropertyPhoto> photos) {
+        this.photos = photos;
+    }
+
+    // test
     public long getId() {
         return id;
     }
@@ -241,6 +295,16 @@ public class Property {
 
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
+    }
+
+
+    public List<String> getPropertyCoverPaths() {
+        return propertyCoverPaths;
+    }
+
+
+    public void setPropertyCoverPaths(List<String> propertyCoverPaths) {
+        this.propertyCoverPaths = propertyCoverPaths;
     }
 
 
