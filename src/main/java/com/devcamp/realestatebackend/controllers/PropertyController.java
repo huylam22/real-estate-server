@@ -69,8 +69,8 @@ public class PropertyController {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = Property.class))),
 			@ApiResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Property not found", content = @Content) })
-    @GetMapping("/details")
-	public ResponseEntity<Object> getPropertyById(@RequestParam(value="propertyId", required = true) long id) {
+    @GetMapping("/details/{propertyId}")
+	public ResponseEntity<Object> getPropertyById(@PathVariable(value="propertyId", required = true) long id) {
         Optional<Property> propertyData = propertyRepository.findById(id);
         if (propertyData.isPresent()) {
             try {

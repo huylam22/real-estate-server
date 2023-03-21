@@ -2,9 +2,7 @@ package com.devcamp.realestatebackend.models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -15,13 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -97,9 +92,6 @@ public class Property {
     // @JsonProperty("districtId")
     private District district;
 
-    @OneToMany(mappedBy = "property")
-    private Set<PropertyPhoto> photos = new HashSet<>();
-
     public Property() {
     }
 
@@ -109,7 +101,7 @@ public Property(long id, String propertyAddressNumber, String propertyAddressStr
             int propertyBedrooms, int propertyBathrooms, String propertyPrice, String propertyLandType,
             String propertyLandDirection, String propertyLandLegalStatus, String propertyDescription,
             String propertyPostingStatus, List<String> propertyCoverPaths, LocalDateTime createdDate, Province province,
-            District district, Set<PropertyPhoto> photos) {
+            District district) {
         this.id = id;
         this.propertyAddressNumber = propertyAddressNumber;
         this.propertyAddressStreet = propertyAddressStreet;
@@ -130,7 +122,6 @@ public Property(long id, String propertyAddressNumber, String propertyAddressStr
         this.createdDate = createdDate;
         this.province = province;
         this.district = district;
-        this.photos = photos;
     }
 
 
@@ -152,13 +143,6 @@ public Property(long id, String propertyAddressNumber, String propertyAddressStr
         this.propertyBathrooms = propertyBathrooms;
     }
 
-    public Set<PropertyPhoto> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<PropertyPhoto> photos) {
-        this.photos = photos;
-    }
 
     // test
     public long getId() {
