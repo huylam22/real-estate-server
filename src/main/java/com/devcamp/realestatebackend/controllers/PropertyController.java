@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devcamp.realestatebackend.models.District;
@@ -85,27 +84,28 @@ public class PropertyController {
         }
     }
     
-    // TEST
-//     @GetMapping("/similar-properties/{propertyId}")
-// public ResponseEntity<Object> getSimilarProperties(@PathVariable(value="propertyId", required = true) long id) {
-//     Optional<Property> propertyData = propertyRepository.findById(id);
-//     if (propertyData.isPresent()) {
-//         try {
-//             Property property = propertyData.get();
-//             String propertyLandType = property.getPropertyLandType();
-//             List<Property> similarProperties = propertyRepository.findByPropertyLandType(propertyLandType);
-//             return new ResponseEntity<>(similarProperties, HttpStatus.OK);
-//         } catch (Exception e) {
-//             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//         }
-//     } else {
-//         return new ResponseEntity<>("Property with id " + id + " not found", HttpStatus.NOT_FOUND);
-//     }
-// }
+
+    @GetMapping("/{propertyId}/similar")
+        public ResponseEntity<Object> getSimilarProperties(@PathVariable(value="propertyId", required = true) long id) {
+            Optional<Property> propertyData = propertyRepository.findById(id);
+            if (propertyData.isPresent()) {
+                try {
+                    Property property = propertyData.get();
+                    String propertyLandType = property.getPropertyLandType();
+                    List<Property> similarProperties = propertyRepository.findByPropertyLandType(propertyLandType);
+                    return new ResponseEntity<>(similarProperties, HttpStatus.OK);
+                } catch (Exception e) {
+                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            } else {
+                return new ResponseEntity<>("Property with id " + id + " not found", HttpStatus.NOT_FOUND);
+            }
+        }
+
     @PostMapping("/create/{provinceId}/{id}")
-    public ResponseEntity<Object> createProperty(@PathVariable("id") int id,
-                                               @PathVariable("provinceId") int provinceId,
-                                               @RequestBody Property paramProperty) {
+        public ResponseEntity<Object> createProperty(@PathVariable("id") int id,
+                                                    @PathVariable("provinceId") int provinceId,
+                                                    @RequestBody Property paramProperty) {
         try {
             Optional<Province> propertyProvince = provinceRepository.findById(provinceId);
             Optional<District> propertyDistrict = districtRepository.findById(id);
