@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +31,10 @@ public class PropertyService {
         .collect(Collectors.toList());
         return propertyDTOs;
         }
+
+    public PropertyDTO getPropertyDTOByIdService(Long id) {
+        Property property = propertyRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Property not found with id " + id));
+        return new PropertyDTO(property);
+    }
 }
