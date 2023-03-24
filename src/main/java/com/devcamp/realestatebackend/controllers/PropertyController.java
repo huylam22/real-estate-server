@@ -84,6 +84,15 @@ public class PropertyController {
         }
     }
     
+    @GetMapping("/{propertyId}")
+    public ResponseEntity<PropertyDTO> getProperty(@PathVariable long propertyId) {
+        PropertyDTO property = propertyService.getPropertyDTOByIdService(propertyId); // implement this method in your service layer to get the property by id
+        if (property == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(property);
+        }
+    }
 
     @GetMapping("/{propertyId}/similar")
         public ResponseEntity<Object> getSimilarProperties(@PathVariable(value="propertyId", required = true) long id) {

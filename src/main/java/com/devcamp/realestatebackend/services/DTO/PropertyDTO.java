@@ -28,6 +28,8 @@ public class PropertyDTO {
     private int districtId;
     private String provincePrefix;
     private String districtPrefix;
+    private String districtName;
+    private String provinceName;
     private List<String> propertyCoverPaths;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -51,7 +53,9 @@ public class PropertyDTO {
         this.provinceId = property.getProvince().getId();
         this.districtId = property.getDistrict().getId();
         this.provincePrefix = property.getProvince().getProvinceCode();
+        this.provinceName = property.getProvince().getProvinceName();
         this.districtPrefix = property.getDistrict().getDistrictPrefix();
+        this.districtName = property.getDistrict().getDistrictName();
         this.createdDate = property.getCreatedDate();
         this.propertyBathrooms = property.getPropertyBathrooms();
         this.propertyBedrooms = property.getPropertyBedrooms();
@@ -59,6 +63,22 @@ public class PropertyDTO {
     }
 
     public PropertyDTO() {
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
     public String getProvincePrefix() {
