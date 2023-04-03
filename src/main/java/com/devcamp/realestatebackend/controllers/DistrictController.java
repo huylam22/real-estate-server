@@ -62,7 +62,7 @@ public class DistrictController {
 
      // Tạo MỚI District sử dụng phương thức POST
     //  @CrossOrigin
-     @PostMapping("create/province/{id}")// Dùng phương thức POST
+     @PostMapping("/create/{id}")// Dùng phương thức POST
      public ResponseEntity<Object> createCDistrict(@PathVariable("id") int id, @RequestBody District pDistricts) {        
          try {   
              Optional<Province> provinceData = pProvinceRepository.findById(id);
@@ -111,7 +111,7 @@ public class DistrictController {
 	}
 
     // Xoá/delete province theo {id} KHÔNG dùng service, sử dụng phương thức DELETE
-    @DeleteMapping("/districts/delete/{id}")// Dùng phương thức DELETE
+    @DeleteMapping("/delete/{id}")// Dùng phương thức DELETE
     public ResponseEntity<District> deleteCProvinceById(@PathVariable("id") int id) {
         try {
             Optional<District> districtData = pDistrictRepository.findById(id);

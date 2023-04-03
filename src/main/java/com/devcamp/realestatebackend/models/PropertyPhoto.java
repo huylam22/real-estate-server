@@ -1,8 +1,8 @@
 package com.devcamp.realestatebackend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,69 +12,68 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "property_photos")
 public class PropertyPhoto {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long propertyPhotoId;
 
-    @Column(name = "photo_name")
-    private String propertyPhotoName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long propertyPhotoId;
 
-    @Column(name = "photo_url")
-    private String propertyPhotoUrl; // THE S3 KEY
-    
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "property_id")
-    private Property property;
-    
-    public PropertyPhoto() {
-    }
+  @Column(name = "photo_name")
+  private String propertyPhotoName;
 
-    public PropertyPhoto(Long propertyPhotoId, String propertyPhotoName, String propertyPhotoUrl, Property property) {
-        this.propertyPhotoId = propertyPhotoId;
-        this.propertyPhotoName = propertyPhotoName;
-        this.propertyPhotoUrl = propertyPhotoUrl;
-        this.property = property;
-    }
-    public Long getPropertyPhotoId() {
-        return propertyPhotoId;
-    }
+  @Column(name = "photo_url")
+  private String propertyPhotoUrl; // THE S3 KEY
 
-    public void setPropertyPhotoId(Long propertyPhotoId) {
-        this.propertyPhotoId = propertyPhotoId;
-    }
+  @ManyToOne
+  @JsonIgnore
+  @JoinColumn(name = "property_id")
+  private Property property;
 
-    public String getPropertyPhotoName() {
-        return propertyPhotoName;
-    }
+  public PropertyPhoto() {}
 
-    public void setPropertyPhotoName(String propertyPhotoName) {
-        this.propertyPhotoName = propertyPhotoName;
-    }
+  public PropertyPhoto(
+    Long propertyPhotoId,
+    String propertyPhotoName,
+    String propertyPhotoUrl,
+    Property property
+  ) {
+    this.propertyPhotoId = propertyPhotoId;
+    this.propertyPhotoName = propertyPhotoName;
+    this.propertyPhotoUrl = propertyPhotoUrl;
+    this.property = property;
+  }
 
-    public String getPropertyPhotoUrl() {
-        return propertyPhotoUrl;
-    }
+  public Long getPropertyPhotoId() {
+    return propertyPhotoId;
+  }
 
-    public void setPropertyPhotoUrl(String propertyPhotoUrl) {
-        this.propertyPhotoUrl = propertyPhotoUrl;
-    }
+  public void setPropertyPhotoId(Long propertyPhotoId) {
+    this.propertyPhotoId = propertyPhotoId;
+  }
 
-    public Property getProperty() {
-        return property;
-    }
+  public String getPropertyPhotoName() {
+    return propertyPhotoName;
+  }
 
-    public void setProperty(Property property) {
-        this.property = property;
-    }
+  public void setPropertyPhotoName(String propertyPhotoName) {
+    this.propertyPhotoName = propertyPhotoName;
+  }
 
+  public String getPropertyPhotoUrl() {
+    return propertyPhotoUrl;
+  }
 
-    
-    
+  public void setPropertyPhotoUrl(String propertyPhotoUrl) {
+    this.propertyPhotoUrl = propertyPhotoUrl;
+  }
+
+  public Property getProperty() {
+    return property;
+  }
+
+  public void setProperty(Property property) {
+    this.property = property;
+  }
 }

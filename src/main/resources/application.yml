@@ -1,13 +1,4 @@
-cloud:
-  aws:
-    credentials:
-      access-key: AKIAUO3EUIXZUBA7NHGQ
-      secret-key: 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
-    region:
-      static: ap-northeast-1
-    stack:
-      auto: false
-
-application:
-  bucket:
-    name: huylam-property-images-upload
+aws:
+  secretsmanager:
+    accessKey: your-access-key
+    secretKey: your-secret-key

@@ -13,8 +13,7 @@ public class WardService {
     @Autowired
     IWardRepository pWardRepository;
 
-    public ArrayList<Ward> getAllWardsService() {
-        
+    public ArrayList<Ward> getAllWardsService() {  
         ArrayList<Ward> listWards = new ArrayList<>();
         pWardRepository.findAll().forEach(listWards::add);
         return listWards;

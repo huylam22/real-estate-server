@@ -11,12 +11,12 @@ public class PropertyDTO {
     private long id;
     private String propertyAddressNumber;
     private String propertyAddressStreet;
-    private String propertyArea;
-    private String propertyWidth;
-    private String propertyLength;
-    private String propertyFloorUnits;
+    private float propertyArea;
+    private float propertyWidth;
+    private float propertyLength;
+    private int propertyFloorUnits;
     private String propertyFloorLocation;
-    private String propertyPrice;
+    private float propertyPrice;
     private String propertyLandType;
     private String propertyLandDirection;
     private String propertyLandLegalStatus;
@@ -28,6 +28,8 @@ public class PropertyDTO {
     private int districtId;
     private String provincePrefix;
     private String districtPrefix;
+    private String districtName;
+    private String provinceName;
     private List<String> propertyCoverPaths;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -51,7 +53,9 @@ public class PropertyDTO {
         this.provinceId = property.getProvince().getId();
         this.districtId = property.getDistrict().getId();
         this.provincePrefix = property.getProvince().getProvinceCode();
+        this.provinceName = property.getProvince().getProvinceName();
         this.districtPrefix = property.getDistrict().getDistrictPrefix();
+        this.districtName = property.getDistrict().getDistrictName();
         this.createdDate = property.getCreatedDate();
         this.propertyBathrooms = property.getPropertyBathrooms();
         this.propertyBedrooms = property.getPropertyBedrooms();
@@ -59,37 +63,6 @@ public class PropertyDTO {
     }
 
     public PropertyDTO() {
-    }
-
-    public String getProvincePrefix() {
-        return provincePrefix;
-    }
-    public int getPropertyBedrooms() {
-        return propertyBedrooms;
-    }
-
-    public void setPropertyBedrooms(int propertyBedrooms) {
-        this.propertyBedrooms = propertyBedrooms;
-    }
-
-    public int getPropertyBathrooms() {
-        return propertyBathrooms;
-    }
-
-    public void setPropertyBathrooms(int propertyBathrooms) {
-        this.propertyBathrooms = propertyBathrooms;
-    }
-
-    public void setProvincePrefix(String provincePrefix) {
-        this.provincePrefix = provincePrefix;
-    }
-
-    public String getDistrictPrefix() {
-        return districtPrefix;
-    }
-
-    public void setDistrictPrefix(String districtPrefix) {
-        this.districtPrefix = districtPrefix;
     }
 
     public long getId() {
@@ -116,35 +89,35 @@ public class PropertyDTO {
         this.propertyAddressStreet = propertyAddressStreet;
     }
 
-    public String getPropertyArea() {
+    public float getPropertyArea() {
         return propertyArea;
     }
 
-    public void setPropertyArea(String propertyArea) {
+    public void setPropertyArea(float propertyArea) {
         this.propertyArea = propertyArea;
     }
 
-    public String getPropertyWidth() {
+    public float getPropertyWidth() {
         return propertyWidth;
     }
 
-    public void setPropertyWidth(String propertyWidth) {
+    public void setPropertyWidth(float propertyWidth) {
         this.propertyWidth = propertyWidth;
     }
 
-    public String getPropertyLength() {
+    public float getPropertyLength() {
         return propertyLength;
     }
 
-    public void setPropertyLength(String propertyLength) {
+    public void setPropertyLength(float propertyLength) {
         this.propertyLength = propertyLength;
     }
 
-    public String getPropertyFloorUnits() {
+    public int getPropertyFloorUnits() {
         return propertyFloorUnits;
     }
 
-    public void setPropertyFloorUnits(String propertyFloorUnits) {
+    public void setPropertyFloorUnits(int propertyFloorUnits) {
         this.propertyFloorUnits = propertyFloorUnits;
     }
 
@@ -156,11 +129,11 @@ public class PropertyDTO {
         this.propertyFloorLocation = propertyFloorLocation;
     }
 
-    public String getPropertyPrice() {
+    public float getPropertyPrice() {
         return propertyPrice;
     }
 
-    public void setPropertyPrice(String propertyPrice) {
+    public void setPropertyPrice(float propertyPrice) {
         this.propertyPrice = propertyPrice;
     }
 
@@ -204,6 +177,22 @@ public class PropertyDTO {
         this.propertyPostingStatus = propertyPostingStatus;
     }
 
+    public int getPropertyBedrooms() {
+        return propertyBedrooms;
+    }
+
+    public void setPropertyBedrooms(int propertyBedrooms) {
+        this.propertyBedrooms = propertyBedrooms;
+    }
+
+    public int getPropertyBathrooms() {
+        return propertyBathrooms;
+    }
+
+    public void setPropertyBathrooms(int propertyBathrooms) {
+        this.propertyBathrooms = propertyBathrooms;
+    }
+
     public int getProvinceId() {
         return provinceId;
     }
@@ -220,12 +209,36 @@ public class PropertyDTO {
         this.districtId = districtId;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public String getProvincePrefix() {
+        return provincePrefix;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+    public void setProvincePrefix(String provincePrefix) {
+        this.provincePrefix = provincePrefix;
+    }
+
+    public String getDistrictPrefix() {
+        return districtPrefix;
+    }
+
+    public void setDistrictPrefix(String districtPrefix) {
+        this.districtPrefix = districtPrefix;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
     public List<String> getPropertyCoverPaths() {
@@ -235,5 +248,14 @@ public class PropertyDTO {
     public void setPropertyCoverPaths(List<String> propertyCoverPaths) {
         this.propertyCoverPaths = propertyCoverPaths;
     }
-    
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+ 
 }
