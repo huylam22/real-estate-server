@@ -62,7 +62,7 @@ public class DistrictController {
 
      // Tạo MỚI District sử dụng phương thức POST
     //  @CrossOrigin
-     @PostMapping("create/{id}")// Dùng phương thức POST
+     @PostMapping("/create/{id}")// Dùng phương thức POST
      public ResponseEntity<Object> createCDistrict(@PathVariable("id") int id, @RequestBody District pDistricts) {        
          try {   
              Optional<Province> provinceData = pProvinceRepository.findById(id);

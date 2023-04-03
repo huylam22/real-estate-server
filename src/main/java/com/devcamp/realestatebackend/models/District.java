@@ -1,7 +1,9 @@
 package com.devcamp.realestatebackend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,97 +14,97 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "districts")
 public class District {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    @Column(name = "name")
-    private String districtName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    @Column(name = "prefix")
-    private String districtPrefix;
+  @Column(name = "name")
+  private String districtName;
 
-    @ManyToOne
-    @JsonBackReference(value="province-district")
-    @JoinColumn(name="province_id")
-    private Province province;
+  @Column(name = "prefix")
+  private String districtPrefix;
 
-    @OneToMany(targetEntity = Property.class, mappedBy = "district")
-    @JsonManagedReference(value="district-property")
-    // @JsonIgnore
-    private Set<Property> properties; 
+  @ManyToOne
+  @JsonBackReference(value = "province-district")
+  @JoinColumn(name = "province_id")
+  private Province province;
 
-    @OneToMany(targetEntity = Ward.class, mappedBy = "district")
-    @JsonManagedReference(value="district-ward")
-    private Set<Ward> wards;
+  @OneToMany(targetEntity = Property.class, mappedBy = "district")
+  @JsonManagedReference(value = "district-property")
+  // @JsonIgnore
+  private Set<Property> properties;
 
-    public District() {
-    }
+  @OneToMany(targetEntity = Ward.class, mappedBy = "district")
+  @JsonManagedReference(value = "district-ward")
+  private Set<Ward> wards;
 
-    public District(int id, String districtName, String districtPrefix, Province province, Set<Property> properties,
-            Set<Ward> wards) {
-        this.id = id;
-        this.districtName = districtName;
-        this.districtPrefix = districtPrefix;
-        this.province = province;
-        this.properties = properties;
-        this.wards = wards;
-    }
+  public District() {}
 
-    public int getId() {
-        return id;
-    }
+  public District(
+    int id,
+    String districtName,
+    String districtPrefix,
+    Province province,
+    Set<Property> properties,
+    Set<Ward> wards
+  ) {
+    this.id = id;
+    this.districtName = districtName;
+    this.districtPrefix = districtPrefix;
+    this.province = province;
+    this.properties = properties;
+    this.wards = wards;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getDistrictName() {
-        return districtName;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setDistrictName(String districtName) {
-        this.districtName = districtName;
-    }
+  public String getDistrictName() {
+    return districtName;
+  }
 
-    public String getDistrictPrefix() {
-        return districtPrefix;
-    }
+  public void setDistrictName(String districtName) {
+    this.districtName = districtName;
+  }
 
-    public void setDistrictPrefix(String districtPrefix) {
-        this.districtPrefix = districtPrefix;
-    }
+  public String getDistrictPrefix() {
+    return districtPrefix;
+  }
 
-    public Province getProvince() {
-        return province;
-    }
+  public void setDistrictPrefix(String districtPrefix) {
+    this.districtPrefix = districtPrefix;
+  }
 
-    public void setProvince(Province province) {
-        this.province = province;
-    }
+  public Province getProvince() {
+    return province;
+  }
 
-    public Set<Property> getProperties() {
-        return properties;
-    }
+  public void setProvince(Province province) {
+    this.province = province;
+  }
 
-    public void setProperties(Set<Property> properties) {
-        this.properties = properties;
-    }
+  public Set<Property> getProperties() {
+    return properties;
+  }
 
-    public Set<Ward> getWards() {
-        return wards;
-    }
+  public void setProperties(Set<Property> properties) {
+    this.properties = properties;
+  }
 
-    public void setWards(Set<Ward> wards) {
-        this.wards = wards;
-    } 
+  public Set<Ward> getWards() {
+    return wards;
+  }
 
+  public void setWards(Set<Ward> wards) {
+    this.wards = wards;
+  }
 }
