@@ -11,8 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "provinces")
 public class Province {
 
@@ -43,60 +49,4 @@ public class Province {
   @JsonManagedReference(value = "province-property")
   // @JsonIgnore
   private Set<Property> properties;
-
-  public Province() {}
-
-  public Province(
-    int id,
-    String provinceCode,
-    String provinceName,
-    Set<District> districts,
-    Set<Property> properties
-  ) {
-    this.id = id;
-    this.provinceCode = provinceCode;
-    this.provinceName = provinceName;
-    this.districts = districts;
-    this.properties = properties;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getProvinceCode() {
-    return provinceCode;
-  }
-
-  public void setProvinceCode(String provinceCode) {
-    this.provinceCode = provinceCode;
-  }
-
-  public String getProvinceName() {
-    return provinceName;
-  }
-
-  public void setProvinceName(String provinceName) {
-    this.provinceName = provinceName;
-  }
-
-  public Set<District> getDistricts() {
-    return districts;
-  }
-
-  public void setDistricts(Set<District> districts) {
-    this.districts = districts;
-  }
-
-  public Set<Property> getProperties() {
-    return properties;
-  }
-
-  public void setProperties(Set<Property> properties) {
-    this.properties = properties;
-  }
 }

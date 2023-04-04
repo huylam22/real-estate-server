@@ -13,8 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "districts")
 public class District {
 
@@ -41,70 +47,4 @@ public class District {
   @OneToMany(targetEntity = Ward.class, mappedBy = "district")
   @JsonManagedReference(value = "district-ward")
   private Set<Ward> wards;
-
-  public District() {}
-
-  public District(
-    int id,
-    String districtName,
-    String districtPrefix,
-    Province province,
-    Set<Property> properties,
-    Set<Ward> wards
-  ) {
-    this.id = id;
-    this.districtName = districtName;
-    this.districtPrefix = districtPrefix;
-    this.province = province;
-    this.properties = properties;
-    this.wards = wards;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getDistrictName() {
-    return districtName;
-  }
-
-  public void setDistrictName(String districtName) {
-    this.districtName = districtName;
-  }
-
-  public String getDistrictPrefix() {
-    return districtPrefix;
-  }
-
-  public void setDistrictPrefix(String districtPrefix) {
-    this.districtPrefix = districtPrefix;
-  }
-
-  public Province getProvince() {
-    return province;
-  }
-
-  public void setProvince(Province province) {
-    this.province = province;
-  }
-
-  public Set<Property> getProperties() {
-    return properties;
-  }
-
-  public void setProperties(Set<Property> properties) {
-    this.properties = properties;
-  }
-
-  public Set<Ward> getWards() {
-    return wards;
-  }
-
-  public void setWards(Set<Ward> wards) {
-    this.wards = wards;
-  }
 }

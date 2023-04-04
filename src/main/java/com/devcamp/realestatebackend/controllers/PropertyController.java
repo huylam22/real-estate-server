@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/properties")
+@RequestMapping("api/v1/properties")
 public class PropertyController {
 
   @Autowired

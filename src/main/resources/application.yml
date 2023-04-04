@@ -1,4 +1,13 @@
-aws:
-  secretsmanager:
-    accessKey: your-access-key
-    secretKey: your-secret-key
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAUO3EUIXZ4WSGIPGP
+      secret-key: 2s29XNCew8lN8c16gNahb1gPSRXU4e3rrm/czgJa
+    region:
+      static: ap-southeast-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: huy-property-images

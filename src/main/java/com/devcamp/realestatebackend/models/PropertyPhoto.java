@@ -11,8 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "property_photos")
 public class PropertyPhoto {
 
@@ -30,50 +36,4 @@ public class PropertyPhoto {
   @JsonIgnore
   @JoinColumn(name = "property_id")
   private Property property;
-
-  public PropertyPhoto() {}
-
-  public PropertyPhoto(
-    Long propertyPhotoId,
-    String propertyPhotoName,
-    String propertyPhotoUrl,
-    Property property
-  ) {
-    this.propertyPhotoId = propertyPhotoId;
-    this.propertyPhotoName = propertyPhotoName;
-    this.propertyPhotoUrl = propertyPhotoUrl;
-    this.property = property;
-  }
-
-  public Long getPropertyPhotoId() {
-    return propertyPhotoId;
-  }
-
-  public void setPropertyPhotoId(Long propertyPhotoId) {
-    this.propertyPhotoId = propertyPhotoId;
-  }
-
-  public String getPropertyPhotoName() {
-    return propertyPhotoName;
-  }
-
-  public void setPropertyPhotoName(String propertyPhotoName) {
-    this.propertyPhotoName = propertyPhotoName;
-  }
-
-  public String getPropertyPhotoUrl() {
-    return propertyPhotoUrl;
-  }
-
-  public void setPropertyPhotoUrl(String propertyPhotoUrl) {
-    this.propertyPhotoUrl = propertyPhotoUrl;
-  }
-
-  public Property getProperty() {
-    return property;
-  }
-
-  public void setProperty(Property property) {
-    this.property = property;
-  }
 }
